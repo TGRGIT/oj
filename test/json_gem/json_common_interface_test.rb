@@ -119,6 +119,10 @@ class JSONCommonInterfaceTest < Test::Unit::TestCase
     assert_raise(JSON::ParserError) { JSON.load(' ', nil, :allow_blank => false) }
   end
 
+  def test_attribute_error_behaviour
+    assert_raise(JSON::ParserError) { JSON.load('name=', nil, :allow_blank => true) }
+  end
+
   def test_dump
     too_deep = '[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]'
     assert_equal too_deep, JSON.dump(eval(too_deep))
